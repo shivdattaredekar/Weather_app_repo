@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')      
 def show_form(): # this is done to show the homepage to the user
-    render_template('index.html')
+    return render_template('index.html')
 
 
 @app.route("/weatherapp",methods = ['POST' , "GET"])
