@@ -7,24 +7,17 @@ app = Flask(__name__)
 def show_form(): # this is done to show the homepage to the user
     return render_template('index.html')
 
-
-@app.route("/weatherapp",methods = ['POST' , "GET"])
+@app.route("/weatherapp", methods=['POST', 'GET'])
 def get_weatherdata():
     url = "https://api.openweathermap.org/data/2.5/weather"
     param = {
-        'q' : request.form.get('city'),
-        'appid' : request.form.get('appid'),
-        'units' : request.form.get('units')
+        'q': request.form.get('city'),
+        'appid': request.form.get('appid'),
+        'units': request.form.get('units')
     }
-    response = response.get(url, param = param)
-    data =  response.json()
-    return f"data : {data}"
+    response = requests.get(url, params=param)  # Fix: Changed 'response' variable name
+    data = response.json()
+    return f"data: {data}"
 
 if __name__ == '__main__':
-    app.run(host= "0.0.0.0", port=5005)
-
-
-
-
-
-
+    app.run(host="0.0.0.0", port=5005)
